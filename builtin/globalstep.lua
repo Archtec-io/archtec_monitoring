@@ -1,14 +1,15 @@
 local get_us_time = minetest.get_us_time
+
 local metric_callbacks = monitoring.gauge("globalstep_callback_count", "number of globalstep callbacks")
 local metric = monitoring.counter("globalstep_count", "number of globalstep calls")
 local metric_time = monitoring.counter("globalstep_time", "time usage in microseconds for globalstep calls")
 local metric_time_max = monitoring.gauge(
 	"globalstep_time_max",
 	"max time usage in microseconds for globalstep calls",
-	{ autoflush=true }
+	{autoflush = true}
 )
 
--- <unique-key> -> { strategy = "" }
+-- <unique-key> -> {strategy = ""}
 -- expose config for other mods
 monitoring.globalsteps_config = {}
 
@@ -96,14 +97,14 @@ end
 -- see: https://github.com/minetest-mods/mesecons/blob/master/mesecons/actionqueue.lua#L118
 minetest.register_on_mods_loaded(function()
 	minetest.after(5, function()
-		print("[monitoring] wrapping globalstep callbacks")
+		minetest.log("verbose", "[archtec_monitoring] wrapping globalstep callbacks")
 		wrap_globalsteps()
 	end)
 end)
 
 minetest.register_chatcommand("globalstep_disable", {
 	description = "disables a globalstep",
-	privs = {server=true},
+	privs = {server = true},
 	func = function(name, param)
 		if not param then
 			minetest.chat_send_player(name, "Usage: globalstep_disable <modname>")
@@ -111,13 +112,13 @@ minetest.register_chatcommand("globalstep_disable", {
 		end
 
 		minetest.log("warning", "Player " .. name .. " disables globalstep " .. param)
-		monitoring.globalsteps_config[param] = { strategy = STRATEGY_DISABLED }
+		monitoring.globalsteps_config[param] = {strategy = STRATEGY_DISABLED}
 	end
 })
 
 minetest.register_chatcommand("globalstep_enable", {
 	description = "enables a globalstep",
-	privs = {server=true},
+	privs = {server = true},
 	func = function(name, param)
 		if not param then
 			minetest.chat_send_player(name, "Usage: globalstep_enable <modname>")
@@ -131,7 +132,7 @@ minetest.register_chatcommand("globalstep_enable", {
 
 minetest.register_chatcommand("globalsteps_enable", {
 	description = "enables all globalsteps",
-	privs = {server=true},
+	privs = {server = true},
 	func = function(name)
 		minetest.log("warning", "Player " .. name .. " enables all globalsteps")
 		monitoring.globalsteps_config = {}

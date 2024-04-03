@@ -1,8 +1,6 @@
-
-
 --[[
 monitoring.wrap_global({"minetest", "is_protected"}, "minetest_is_protected")
---]]
+]]--
 
 monitoring.wrap_global = function(path, prefix)
 	local desc = table.concat(path, ".")

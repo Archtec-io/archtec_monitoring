@@ -1,4 +1,3 @@
-
 local get_us_time = minetest.get_us_time
 
 monitoring.histogram = function(name, help, buckets)

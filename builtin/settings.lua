@@ -1,5 +1,3 @@
-
-
 local settings = {
 	"max_packets_per_iteration",
 
@@ -15,9 +13,7 @@ local settings = {
 
 for _, setting in ipairs(settings) do
 	local name = setting:gsub("[.]", "_")
-
 	local metric = monitoring.gauge("setting_" .. name, "setting: " .. setting)
-
 	local value = minetest.settings:get(setting)
 
 	if value then

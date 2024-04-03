@@ -1,3 +1,0 @@
-monitoring.prometheus_push_url (monitoring push url) string
-
-monitoring.verbose (verbose monitoring) bool false

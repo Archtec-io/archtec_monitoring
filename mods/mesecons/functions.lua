@@ -1,7 +1,4 @@
-
-
 local metrics = {} -- { fn_name = { count=, time= }, ... }
-
 
 local function register_function(name)
 	local entry = {}

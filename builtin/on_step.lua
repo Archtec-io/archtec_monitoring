@@ -5,9 +5,8 @@ local metric_time = monitoring.counter("entity_on_step_time", "time usage in mic
 local metric_time_max = monitoring.gauge(
 	"entity_on_step_time_max",
 	"max time usage in microseconds for on_step calls",
-	{ autoflush=true }
+	{autoflush = true}
 )
-
 
 minetest.register_on_mods_loaded(function()
 	for _, entity in pairs(minetest.registered_entities) do

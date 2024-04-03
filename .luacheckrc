@@ -1,4 +1,5 @@
 globals = {
+	"archtec",
 	"monitoring",
 	"minetest",
 	"technic",

@@ -1,11 +1,9 @@
-local metric_time = monitoring.counter("registered_on_joinplayers_time", "time usage in microseconds" ..
-	"for registered_on_joinplayers calls")
+local metric_time = monitoring.counter("registered_on_joinplayers_time", "time usage in microseconds for registered_on_joinplayers calls")
 local metric_time_max = monitoring.gauge(
 	"registered_on_joinplayers_time_max",
 	"max time usage in microseconds for registered_on_joinplayers calls",
-	{ autoflush=true }
+	{autoflush = true}
 )
-
 
 minetest.register_on_mods_loaded(function()
 	for i, fn in ipairs(minetest.registered_on_joinplayers) do

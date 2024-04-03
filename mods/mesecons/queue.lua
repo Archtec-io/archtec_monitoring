@@ -1,6 +1,3 @@
-
-
-
 -- queue size metric
 local metric_action_queue_size = monitoring.gauge(
 	"mesecons_action_queue_size",
@@ -8,9 +5,9 @@ local metric_action_queue_size = monitoring.gauge(
 )
 
 local metric_action_queue_size_max = monitoring.gauge(
-        "mesecons_action_queue_size_max",
-        "max size of action queue",
-	{ autoflush=true }
+	"mesecons_action_queue_size_max",
+	"max size of action queue",
+	{autoflush = true}
 )
 
 minetest.register_globalstep(function()

@@ -1,4 +1,3 @@
--- generated blocks (80x80)
 local get_us_time = minetest.get_us_time
 
 local metric = monitoring.counter("mapgen_generated_count", "Generated mapgen count")
@@ -7,7 +6,7 @@ local metric_time = monitoring.counter("on_generated_time", "time usage in micro
 local metric_time_max = monitoring.gauge(
 	"on_generated_time_max",
 	"max time usage in microseconds for on_generated calls",
-	{ autoflush=true }
+	{autoflush = true}
 )
 
 minetest.register_on_generated(function()

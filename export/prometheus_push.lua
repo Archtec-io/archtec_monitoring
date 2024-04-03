@@ -46,7 +46,7 @@ function monitoring.serialize_prometheus_metric(metric)
 				-- append labels
 				data = data .. monitoring.serialize_prometheus_labels(metric.options.labels)
 			end
-			data = data  .. " " .. metric.value .. "\n"
+			data = data .. " " .. metric.value .. "\n"
 
 			if metric.options and metric.options.autoflush then
 				-- reset metric value on export
@@ -57,7 +57,7 @@ function monitoring.serialize_prometheus_metric(metric)
 
 		if metric.type == "histogram" then
 			for k, bucket in ipairs(metric.buckets) do
-				data = data .. metric.name .. "_bucket{le=\"" .. bucket  .. "\"} " .. metric.bucketvalues[k] .. "\n"
+				data = data .. metric.name .. "_bucket{le=\"" .. bucket .. "\"} " .. metric.bucketvalues[k] .. "\n"
 			end
 			data = data .. metric.name .. "_bucket{le=\"+Inf\"} " .. metric.infcount .. "\n"
 			data = data .. metric.name .. "_sum " .. metric.sum .. "\n"
@@ -84,15 +84,15 @@ local function push_metrics()
 	-- https://www.nginx.com/blog/deploying-nginx-plus-as-an-api-gateway-part-1/
 	http.fetch({
 		url = monitoring.settings.prom_push_url,
-		extra_headers = { "Content-Type: text/plain" },
+		extra_headers = {"Content-Type: text/plain"},
 		post_data = data,
 		timeout = 5
 	}, function(res)
-			local t_post_us = get_us_time() - t0
-			export_metric_post_time.set(t_post_us / 1000000)
-			if res.code >= 400 then
-				minetest.log("error", "[monitoring] prom-push returned code " .. res.code .. " data: " .. res.data)
-			end
+		local t_post_us = get_us_time() - t0
+		export_metric_post_time.set(t_post_us / 1000000)
+		if res.code >= 400 then
+			minetest.log("error", "[archtec_monitoring] prom-push returned code " .. res.code .. " data: " .. res.data)
+		end
 	end)
 end
 
@@ -102,7 +102,7 @@ function monitoring.prometheus_push_init()
 	minetest.register_globalstep(function(dtime)
 		timer = timer + dtime
 		if timer < 5 then return end
-		timer=0
+		timer = 0
 
 		push_metrics()
 	end)

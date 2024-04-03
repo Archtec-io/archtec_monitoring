@@ -1,4 +1,3 @@
-
 monitoring.gauge = function(name, help, options)
 	local metric = {
 		name = name,
